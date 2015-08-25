@@ -67,6 +67,16 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)conversationListViewController:(ATLConversationListViewController *)conversationListViewController didSearchForText:(NSString *)searchText completion:(void (^)(NSSet <id<ATLParticipant>>*filteredParticipants))completion;
 
+/**
+ @abstract Asks the delegate for the height to use for a conversation's cell.
+ @param conversationListViewController The `ATLConversationListViewController` where the conversation cell will appear.
+ @param conversation The `LYRConversation` object that will be displayed in the cell.
+ @return The height needed for the conversation cell.
+ @discussion Applications should only return a value if the `conversation` object requires a custom cell class. If `0` is returned, the collection view will default
+ to internal height calculations.
+ */
+- (CGFloat)conversationListViewController:(ATLConversationListViewController *)conversationListViewController heightForConversation:(LYRConversation *)conversation;
+
 @end
 
 ///---------------------------------------

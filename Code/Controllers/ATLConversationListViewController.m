@@ -391,6 +391,19 @@ NSString *const ATLConversationListViewControllerDeletionModeEveryone = @"Everyo
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat height = 0;
+    if ([self.delegate respondsToSelector:@selector(conversationListViewController:heightForConversation:)]) {
+        LYRConversation *conversation = [self.queryController objectAtIndexPath:indexPath];
+        height = [self.delegate conversationListViewController:self heightForConversation:conversation];
+    }
+    if (!height) {
+        height = self.rowHeight;
+    }
+    return height;
+}
+
 #pragma mark - UIActionSheetDelegate
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
