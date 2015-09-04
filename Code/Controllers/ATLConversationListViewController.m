@@ -260,7 +260,9 @@ NSString *const ATLConversationListViewControllerDeletionModeEveryone = @"Everyo
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *reuseIdentifier = [self reuseIdentifierForConversation:nil atIndexPath:indexPath];
+    LYRConversation *conversation = [self.queryController objectAtIndexPath:indexPath];
+
+    NSString *reuseIdentifier = [self reuseIdentifierForConversation:conversation atIndexPath:indexPath];
     
     UITableViewCell<ATLConversationPresenting> *conversationCell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
     [self configureCell:conversationCell atIndexPath:indexPath];
@@ -423,8 +425,8 @@ NSString *const ATLConversationListViewControllerDeletionModeEveryone = @"Everyo
 - (NSString *)reuseIdentifierForConversation:(LYRConversation *)conversation atIndexPath:(NSIndexPath *)indexPath
 {
     NSString *reuseIdentifier;
-    if ([self.dataSource respondsToSelector:@selector(reuseIdentifierForConversationListViewController:)]) {
-        reuseIdentifier = [self.dataSource reuseIdentifierForConversationListViewController:self];
+    if ([self.dataSource respondsToSelector:@selector(conversationListViewController:reuseIdentifierForConversation:)]) {
+        reuseIdentifier = [self.dataSource conversationListViewController:self reuseIdentifierForConversation:conversation];
     }
     if (!reuseIdentifier) {
         reuseIdentifier = ATLConversationCellReuseIdentifier;
