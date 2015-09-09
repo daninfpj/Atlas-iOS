@@ -402,7 +402,10 @@ NSString *const ATLConversationListViewControllerDeletionModeEveryone = @"Everyo
     }
     if (!height) {
         height = self.rowHeight;
+    } else if (height < 0) {
+        height = 0;
     }
+
     return height;
 }
 
