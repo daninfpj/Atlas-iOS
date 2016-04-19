@@ -24,7 +24,7 @@
 
 - (NSString *)avatarInitials
 {
-    if (self.firstName && self.lastName) {
+    if (self.firstName && self.lastName && [self.lastName length]) {
         return [NSString stringWithFormat:@"%@%@", [self.firstName substringToIndex:1], [self.lastName substringToIndex:1]];
     }
     return [self.displayName substringToIndex:2];
